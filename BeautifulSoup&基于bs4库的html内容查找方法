@@ -1,0 +1,56 @@
+@BeautifulSoup 就是一个解析、维护html、xml页面的一个功能库
+五种基本类型
+{
+	Tag,Name,Attributes,NavigableString,Comment
+	.name
+	.attrs 属性
+	.string /注释
+	from bs4 import BeautifulSoup
+	import requests
+	r = requests.get("http://python123.io/ws/demo.html")
+	demo = r.text
+	soup = BeautifulSoup(demo,"html.parser")
+	tag = soup.a# name字符串类型
+	print(tag.attrs)#字典格式输出 
+	tag.attas['class']#获得而其中的值
+	type(tag.attrs)#tag的标签可以有0个或者多个属性 
+	type(tag)
+	soup.a.string#<>之间的字符串 不在标签之中的字符串 
+	soup.p.string
+	type(soup.b.string)# bs4.element.NavigableString 可以跨越标签显示字符串 有时需要判断类型 
+}
+基于bs4库的html内容查找方法：
+*html页面的树形结构
+三种遍历方法：
+1 下行遍历（类先序遍历）   
+.contents 获得一个结点的子节点的列表 
+ .children 循环遍历儿子结点
+.descendants 获得子孙结点，用于循环遍历
+{
+	Soup.body.contents 并不仅仅包括标签结点、还有字符串结点
+	Len(soup.body.contents) 获得儿子结点个数
+	Soup.body.contents[1]  body第一个儿子结点的信息
+	For child in soup.body.children:
+	  print(child) 对儿子结点进行遍历
+	For grandson in soup.body.desscendants:  print(grandson)
+}
+2 上行遍历（类中序遍历）
+.parent  结点的父亲标签
+.parents 结点先辈标签的迭代类型，用于循环遍历先辈结点
+{
+	Soup = beautifulSoup(demo,"html.parser")
+Soup.title.parent	soup.parent
+	For parent in soup.a.parents:
+	 if parent is None:
+	     print(parent) #soup没有父结点
+	Else:
+	   print(parent.name)
+}
+3平行遍历（必须发生在同一个父亲节点下,标签之间的navigebable string也构成了结点）（thus soup.head.next_sibling == and )
+.next_sibling 返回按照html文本顺序的下一个平行结点标签
+.privious_sibling 返回翻找htmlwenben顺序的上一个平行结点标签
+.next_siblings  迭代类型，返回翻找html文本顺序的后序所有平行结点标签
+.previous_siblings 迭代类型，返回按照html文本顺序的前续所有平行结点标签
+ for siblinig in soup.a.next_siblings #遍历后序结点
+ for sibling in soup,a,previous_siblings:  #前续  circle 
+

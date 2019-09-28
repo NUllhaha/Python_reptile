@@ -1,0 +1,41 @@
+Import  request
+R = request.get("")
+r.status_code
+r.encording#获得
+r.text[:1000]#前 1000 个字节
+Import requests
+Url =""
+Try:
+   r =request.get(url)
+  r= raise_for_status()
+  r.encording= r.apparent_encoding
+  print(r.text[:1000])
+ except:
+  print("paqushibai")
+
+网站对爬虫限制 ： 
+  1robots协议
+  2 判断对网站访问的http的头来判断是否为爬虫
+  一般接受由浏览器引发的请求
+  所以一般爬取不成功，可能是网站从http的请求的header中检测到了
+  要对头部的header进行伪装重新访问
+  Kv ={‘user-agent’:"Mozilla/5.0"}
+  r= requests.get(url,headers=kv)
+  import requests
+  url="https://www.amazon.cn/b?node=1403206071&tag=baidhydrcn-23&ref=GS_sw_baidu_pc_YMX196_00917"
+  try:
+     kv = {'user-agent':'Mozilla/5.0'}
+      r = requests.get(url,headers=kv)
+      r.raise_for_status()
+      r.encoding=r.apparent_encoding
+     print(r.text)
+  except:
+     print("怕去失败")
+
+ #关键词搜索 
+  关键词接口：/s？wd=keyword8
+  import requests
+  kv = {'wd':'Python'}
+  r=requests.get("http://www.baidu.com/s",params = kv)
+  print(r.status_code)
+  print(r.request.url)

@@ -21,4 +21,51 @@ Re库主要功能函数：
          常用标记：a.  re.I re.IGNORECASE 忽略正则表达式的大小写  {A-Z}能够匹配小写字符 
                    b.  re.M re.MULTILINE  正则表达式中的^（异或）操作符能够将给定字符串的每行的开始部分进行匹配
                    c.  re.S re.DOTALL     正则表达式中的.操作符能够匹配所有字符，默认匹配除换行符外的所有字符
+#match对象
+一次匹配的结果，包含匹配的相关信息
+match = re.search(r'[1-9]\d{5}','BIT 10081')
+if match:
+    print(match.grou[p(0))
+type(match)
+##属性
+.string 待匹配文本
+.re     匹配时使用的pattern对象(正则表达式)
+.pos    正则表达式搜索文本开始位置
+.endpos 正则表达式搜索文本的结束位置
+##方法
+group(0) 获得匹配后的字符串
+start()  匹配字符串在原始字符串中的开始位置
+.end()   匹配字符串在原始字符串的结束位置
+.span()  返回（.start(),.end()）(元组）
+m.string --'BIT 10081' 
+m.re -- re.compile('[1-9]\\d{5}') 程序内部认为 进行过compile 的才是正则表达式
+m.pos -- 0
+m.endpos -- 19
+m.group(0) -- (match中只存在第一次匹配结果)  '10081'  (返回每一次的函数)
+m.start() --3  
+m.end() -- 9
+m.span() --(3,9)
+#贪婪匹配与最小匹配
+re库默认采用贪婪匹配，即输出匹配最长的字串
+    import re
+    match = re.search(r'PY.*N','PYANBNCNDN')
+    print(match.group(0))
+    PYANBNCNDN
+最小匹配 
+    import re
+    match = re.search(r'PY.*?N','PYANBNCNDN')
+    print(match.group(0))
+        PYAN
+ 最小匹配操作符
+  1 前一个字符0次或无限次扩展，最小匹配  *?
+  2 前一个字符一次或无限次扩展，最小匹配  +?
+  3 前一个字符0次或1次扩展，最小匹配      ??
+  4 扩展前一个字符m至n次（含n），最小匹配   [m,n]?
+#总结
+正则表达式是用来简介表达 一组字符串的表达式
+六个对正则表达式匹配的函数：search\match\findall\split\finditer\sub\=
+调用： 1 re.
+       2 re.compile()+regex.search()
   
+
+

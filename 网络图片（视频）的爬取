@@ -1,0 +1,31 @@
+#网络图片的链接格式:
+http://www.example.com/prcture.jpg
+把图片(二进制格式)存成文件
+import requests
+path="E:/abc.jpg"#存放的位置
+url="http://image.baidu.com/search/rnipic.com%2F20111006%2F6239936_092702973000_2.jpg"
+r = requests.get(url)
+print(r.status_code)
+with open(path,'wb') as f:#打开文件 定义为文件标识符f 返回的内容写入f(abc.jpg)中 
+    f.write(r.content)
+f.close()
+
+
+
+import requests 
+import os#与系统有关的库
+url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569147321145&di=1753e94d44145c6fd44811d0d9ed3914&imgtype=0&src=http%3A%2F%2Fpic16.nipic.com%2F20111006%2F6239936_092702973000_2.jpg"
+root="D://pics/"
+path=root+url.split('/')[-1]
+#根目录+链接的倒数第一个/之后的内容（图片的名字） split 分割 按照/
+if not os.path.exists(root):#os 操作--系统
+    os.mkdir(root)#建立根目录
+if not os.path.exists(path):
+    r = requests.get(url)
+    with open(path,'wb') as f:
+            f.write(r.content)
+            f.close()
+else:
+    print("文件已存在")
+
+
